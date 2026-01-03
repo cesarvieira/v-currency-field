@@ -18,6 +18,7 @@ const props = defineProps<Props>();
 
 const instance = getCurrentInstance();
 const defaults = computed(() => {
+  // @ts-expect-error - $vuetify is not typed in the component public instance
   return instance?.proxy?.$vuetify?.defaults?.VCurrencyField;
 });
 const attrs = useAttrs();
