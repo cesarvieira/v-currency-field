@@ -18,7 +18,6 @@ A Vue 3 currency input component for Vuetify 3, built with TypeScript. Provides 
 
 - Vue 3.5+
 - Vuetify 3.11+
-- vue-currency-input 3.2+
 
 ## Installation
 
