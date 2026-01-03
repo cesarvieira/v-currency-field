@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      'v-image-crop-dialog': resolve(dir, '../src'),
+      'v-currency-field': resolve(dir, '../src'),
     },
   },
 });

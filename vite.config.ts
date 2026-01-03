@@ -12,16 +12,16 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      name: 'VImageCropDialog',
-      fileName: 'v-image-crop-dialog',
+      name: 'VCurrencyField',
+      fileName: 'v-currency-field',
     },
     rollupOptions: {
-      external: ['vue', 'vuetify', 'vue-advanced-cropper'],
+      external: ['vue', 'vuetify', 'vue-currency-input'],
       output: {
         globals: {
           vue: 'Vue',
           vuetify: 'Vuetify',
-          'vue-advanced-cropper': 'VueAdvancedCropper',
+          'vue-currency-input': 'VueCurrencyInput',
         },
       },
     },
