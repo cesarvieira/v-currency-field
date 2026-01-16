@@ -60,6 +60,8 @@ const formattedCurrency3 = computed(() => {
                   variant="outlined"
                   density="comfortable"
                   class="mb-4"
+                  :precision="{ min: 0, max: 3 }"
+                  :value-range="{ min: 0, max: 100 }"
                 />
                 <div class="d-flex flex-column gap-2">
                   <VChip

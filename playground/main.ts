@@ -14,10 +14,6 @@ import 'vuetify/styles';
 const app = createApp(App);
 app.use(createVuetify({
   defaults: {
-    VCurrencyField: {
-      currency: 'BRL',
-      locale: 'pt-BR',
-    },
   },
   components,
   directives,

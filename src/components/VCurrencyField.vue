@@ -36,6 +36,7 @@ const {
   numberValue,
 } = useCurrencyInput({
   ...props,
+  ...attrs,
   currency: props.currency ?? 'USD',
   locale: props.locale ?? 'en-US',
   hideCurrencySymbolOnFocus:
