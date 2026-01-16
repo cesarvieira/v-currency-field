@@ -5,6 +5,7 @@ import { VCurrencyField } from '../src/index.ts';
 const currency = ref(1000);
 const currency2 = ref(50000);
 const currency3 = ref(null);
+const currency4 = ref(10000);
 
 const formattedCurrency = computed(() => {
   return new Intl.NumberFormat('en-US', {
@@ -149,6 +150,33 @@ const formattedCurrency3 = computed(() => {
                     prepend-icon="mdi-code-braces"
                   >
                     Raw: {{ currency3 === null ? 'null' : currency3 }}
+                  </VChip>
+                </div>
+              </VCardText>
+            </VCard>
+          </VCol>
+
+          <VCol cols="12">
+            <VCard>
+              <VCardTitle>
+                <VIcon icon="mdi-cog" class="me-2" />
+                Using Defaults (No currency/locale specified)
+              </VCardTitle>
+              <VCardText>
+                <VCurrencyField
+                  v-model="currency4"
+                  label="Amount (uses defaults: BRL, pt-BR)"
+                  placeholder="Enter a value"
+                  variant="outlined"
+                  density="comfortable"
+                  class="mb-4"
+                />
+                <div class="d-flex flex-column gap-2">
+                  <VChip color="warning" variant="flat" prepend-icon="mdi-information">
+                    This field should use BRL/pt-BR from defaults
+                  </VChip>
+                  <VChip color="warning" variant="outlined" prepend-icon="mdi-code-braces">
+                    Raw: {{ currency4 ?? 'null' }}
                   </VChip>
                 </div>
               </VCardText>

@@ -230,7 +230,9 @@ Common combinations:
 
 ## Vuetify Defaults
 
-You can configure default props using Vuetify's defaults system:
+You can configure default props for `VCurrencyField` using Vuetify's defaults system. This allows you to set defaults once and use them across your entire application without repeating props in every component instance.
+
+### Example: Setting Currency and Locale Defaults
 
 ```typescript
 import { createVuetify } from 'vuetify';
@@ -241,10 +243,37 @@ const vuetify = createVuetify({
       currency: 'BRL',
       locale: 'pt-BR',
       variant: 'outlined',
+      density: 'comfortable',
     },
   },
 });
 ```
+
+Now you can use the component without specifying these props every time:
+
+```html
+<template>
+  <!-- Uses defaults: BRL currency, pt-BR locale, outlined variant -->
+  <VCurrencyField v-model="amount" label="Amount" />
+  
+  <!-- You can still override defaults when needed -->
+  <VCurrencyField 
+    v-model="amount" 
+    label="USD Amount" 
+    currency="USD" 
+    locale="en-US"
+  />
+</template>
+```
+
+### Supported Default Props
+
+All props of `VCurrencyField` can be set as defaults, including:
+
+- **Currency-specific props**: `currency`, `locale`, `currencyDisplay`, `hideCurrencySymbolOnFocus`, `hideGroupingSeparatorOnFocus`
+- **All VTextField props**: `variant`, `density`, `color`, `label`, `hint`, `persistent-hint`, `clearable`, etc.
+
+**Note**: Props passed directly to the component instance will always override the defaults.
 
 ## Notes
 

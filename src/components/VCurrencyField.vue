@@ -1,28 +1,32 @@
 <script setup lang="ts">
 import { VTextField } from 'vuetify/components';
-import { computed, getCurrentInstance, watch, useAttrs } from 'vue';
+import { computed, watch, useAttrs } from 'vue';
 import { useCurrencyInput } from 'vue-currency-input';
-import type { CurrencyInputOptions, CurrencyDisplay } from 'vue-currency-input';
+import { type CurrencyInputOptions, CurrencyDisplay } from 'vue-currency-input';
+import { useDefaults } from 'vuetify';
 
 defineOptions({ inheritAttrs: false });
 
 type VTextFieldProps = Omit<InstanceType<typeof VTextField>['$props'], keyof CurrencyInputOptions>;
 interface Props extends
   /* @vue-ignore */ VTextFieldProps,
-  /* @vue-ignore */ Partial<Omit<CurrencyInputOptions, 'currencyDisplay'>> {
+  /* @vue-ignore */ Omit<CurrencyInputOptions, 'currencyDisplay' | 'currency'> {
   modelValue?: number | null;
   currencyDisplay?: keyof typeof CurrencyDisplay;
+  currency?: string;
+  locale?: string;
 };
 
-const props = defineProps<Props>();
+const _props = defineProps<Props>();
+const props = useDefaults(_props, 'VCurrencyField');
 
-const instance = getCurrentInstance();
-const defaults = computed(() => {
-  // @ts-expect-error - $vuetify is not typed in the component public instance
-  return instance?.proxy?.$vuetify?.defaults?.VCurrencyField;
-});
 const attrs = useAttrs();
-const textFieldProps = computed(() => VTextField.filterProps({ ...defaults.value, ...props, ...attrs }));
+const textFieldProps = computed(() =>
+  VTextField.filterProps({
+    ...props,
+    ...attrs,
+  }),
+);
 
 // Configuration of vue-currency-input
 const {
@@ -34,9 +38,11 @@ const {
   ...props,
   currency: props.currency ?? 'USD',
   locale: props.locale ?? 'en-US',
-  hideCurrencySymbolOnFocus: props.hideCurrencySymbolOnFocus ?? false,
-  hideGroupingSeparatorOnFocus: props.hideGroupingSeparatorOnFocus ?? false,
-  currencyDisplay: props.currencyDisplay as CurrencyDisplay,
+  hideCurrencySymbolOnFocus:
+    props.hideCurrencySymbolOnFocus ?? false,
+  hideGroupingSeparatorOnFocus:
+    props.hideGroupingSeparatorOnFocus ?? false,
+  currencyDisplay: (props.currencyDisplay ?? CurrencyDisplay.symbol) as CurrencyDisplay,
 });
 
 const clear = () => {
@@ -62,7 +68,7 @@ watch(
     @update:model-value="void(0)"
     @click:clear="clear"
   >
-    <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
+    <template v-for="slotName in Object.keys($slots)" #[slotName]="slotProps">
       <slot :name="slotName" v-bind="slotProps"></slot>
     </template>
   </VTextField>
