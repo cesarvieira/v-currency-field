@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VTextField } from 'vuetify/components';
-import { computed, watch, useAttrs } from 'vue';
+import { computed, watch, useAttrs, useSlots } from 'vue';
 import { useCurrencyInput } from 'vue-currency-input';
 import { type CurrencyInputOptions, CurrencyDisplay } from 'vue-currency-input';
 import { useDefaults } from 'vuetify';
@@ -27,6 +27,10 @@ const textFieldProps = computed(() =>
     ...attrs,
   }),
 );
+
+// Used to strongly type the dynamic slot names in the template below.
+const slots: Record<string, unknown> = useSlots() as Record<string, unknown>;
+const slotNames = computed<string[]>(() => Object.keys(slots));
 
 // Configuration of vue-currency-input
 const {
@@ -69,7 +73,7 @@ watch(
     @update:model-value="void(0)"
     @click:clear="clear"
   >
-    <template v-for="slotName in Object.keys($slots)" #[slotName]="slotProps">
+    <template v-for="slotName in slotNames" :key="slotName" #[slotName]="slotProps">
       <slot :name="slotName" v-bind="slotProps"></slot>
     </template>
   </VTextField>

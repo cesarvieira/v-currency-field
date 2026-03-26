@@ -1,7 +1,7 @@
 {
   "name": "@cesarv/v-currency-field",
   "version": "1.0.4",
-  "description": "A Vue 3 currency input component for Vuetify 3 with TypeScript support",
+  "description": "A Vue 3 currency input component for Vuetify 4 with TypeScript support",
   "main": "dist/v-currency-field.umd.js",
   "module": "dist/v-currency-field.mjs",
   "types": "dist/index.d.ts",
@@ -21,6 +21,7 @@
     "**/*.css"
   ],
   "scripts": {
+    "dev": "vite --config playground/vite.config.ts",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint .",
     "build": "vite build",
@@ -31,7 +32,7 @@
     "vue",
     "vue3",
     "vuetify",
-    "vuetify3",
+    "vuetify4",
     "currency",
     "currency-field",
     "typescript",
@@ -65,11 +66,14 @@
     "typescript-eslint": "^8.51.0",
     "vite": "^7.3.0",
     "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^3.2.1"
+    "vue-tsc": "^3.2.1",
+    "vue": "^3.5.26",
+    "vuetify": "^4.0.0",
+    "@mdi/font": "^7.4.47"
   },
   "peerDependencies": {
     "vue": "^3.5.26",
-    "vuetify": "^3.11.5"
+    "vuetify": "^4.0.0"
   },
   "dependencies": {
     "vue-currency-input": "^3.2.2"
