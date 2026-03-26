@@ -9,12 +9,15 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
 import App from './App.vue';
-import 'vuetify/styles';
 
 const app = createApp(App);
 app.use(createVuetify({
-  defaults: {
+  theme: {
+    // Vuetify 4 changes the default theme to "system"; pin to "light" to keep
+    // the previous behavior and avoid OS-dependent rendering.
+    defaultTheme: 'light',
   },
+  defaults: {},
   components,
   directives,
 }));
